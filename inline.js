@@ -47,12 +47,6 @@ bot.on('inlineQuery', msg => {
         const answers = bot.answerList(msg.id, {cacheTime: 600});
 
         // Article
-        answers.addArticle({
-            id: msg.id,
-            title: 'Inline Title',
-            description: `Your query: ${ query }`,
-            message_text: 'hihihi'
-        });
 
         answers.addPhoto({
             id: 'photo',
@@ -66,7 +60,7 @@ bot.on('inlineQuery', msg => {
         let request_params = {
             method : 'GET',
             hostname : 'api.cognitive.microsoft.com',
-            path :  '/bing/v7.0/images/search?q=' + encodeURIComponent(query) + '&imageType=AnimatedGif&safeSearch=Off&size=small',
+            path :  '/bing/v7.0/images/search?q=' + encodeURIComponent(query) + '&imageType=AnimatedGif&safeSearch=Off',
             headers : {
                 'Ocp-Apim-Subscription-Key' : bingKey,
             }
@@ -83,7 +77,7 @@ bot.on('inlineQuery', msg => {
                 if (imageResults.value.length > 0) {
 
 
-                    for(let i = 0; i < imageResults.value.length && i < 15; i++) {
+                    for(let i = 0; i < imageResults.value.length && i < 25; i++) {
                         const gif_url = imageResults.value[i].contentUrl;
                         console.log(`gif_url: ${ gif_url }`);
 
